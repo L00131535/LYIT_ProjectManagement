@@ -15,17 +15,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.HttpOverrides;
 using System.Net;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace crowsoftmvc
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -36,18 +38,18 @@ namespace crowsoftmvc
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
-
+            
+            string sqlconnect = Configuration.GetSection("ConnectionStrings").GetValue<string>("DefaultConnection");
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlite(sqlconnect));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.Add(new ServiceDescriptor(typeof(CrowsoftContext), new CrowsoftContext(Configuration.GetConnectionString("DefaultConnection"))));
-	    services.Configure<ForwardedHeadersOptions>(options =>
-	    {
+            services.Add(new ServiceDescriptor(typeof(CrowsoftContext), new CrowsoftContext(Configuration.GetSection("ConnectionStrings").GetValue<string>("DefaultConnection"))));
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
                 options.KnownProxies.Add(IPAddress.Parse("172.28.25.133"));
             });
         }
@@ -55,6 +57,7 @@ namespace crowsoftmvc
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -71,10 +74,11 @@ namespace crowsoftmvc
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-	    app.UseForwardedHeaders(new ForwardedHeadersOptions
-	    {
-	        ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
-	    });
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+            });
+       
 
             app.UseAuthentication();
 
