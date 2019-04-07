@@ -1,21 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using crowsoftmvc.Models;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
-using crowsoftmvc.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace crowsoftmvc.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class CsoftDbContext : DbContext
     {
         public string ConnectionString { get; set; }
 
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
+        public CsoftDbContext(string connectionString)
         {
-
+            this.ConnectionString = connectionString;
         }
 
         private MySqlConnection GetConnection()
@@ -24,5 +23,6 @@ namespace crowsoftmvc.Data
         }
 
         public DbSet<crowsoftmvc.Models.UserAccount> UserAccount { get; set; }
+
     }
 }

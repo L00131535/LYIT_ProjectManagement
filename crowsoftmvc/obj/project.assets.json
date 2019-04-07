@@ -2910,6 +2910,19 @@
           "lib/netcoreapp2.0/MySql.Data.dll": {}
         }
       },
+      "MySql.Data.EntityFrameworkCore/8.0.15": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "2.1.2",
+          "MySql.Data": "8.0.15"
+        },
+        "compile": {
+          "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {}
+        }
+      },
       "NETStandard.Library/2.0.3": {
         "type": "package",
         "dependencies": {
@@ -8205,6 +8218,25 @@
         "mysql.data.nuspec"
       ]
     },
+    "MySql.Data.EntityFrameworkCore/8.0.15": {
+      "sha512": "NjYJSbHmiEmxesaNAWQRk15roOX81bI2toPpBypYhHFIKXHxkIPgQH3lxV60efMlIyhSnzLqnIE5kmNsPWfzww==",
+      "type": "package",
+      "path": "mysql.data.entityframeworkcore/8.0.15",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/MySql.Data.EntityFrameworkCore.dll",
+        "lib/net452/MySql.Data.EntityFrameworkCore.xml",
+        "lib/net461/MySql.Data.EntityFrameworkCore.dll",
+        "lib/net461/MySql.Data.EntityFrameworkCore.xml",
+        "lib/netstandard1.6/MySql.Data.EntityFrameworkCore.dll",
+        "lib/netstandard1.6/MySql.Data.EntityFrameworkCore.xml",
+        "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll",
+        "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.xml",
+        "mysql.data.entityframeworkcore.8.0.15.nupkg.sha512",
+        "mysql.data.entityframeworkcore.nuspec"
+      ]
+    },
     "NETStandard.Library/2.0.3": {
       "sha512": "st47PosZSHrjECdjeIzZQbzivYBJFv6P2nv4cj2ypdI204DO+vZ7l5raGMiX4eXMJ53RfOIg+/s4DHVZ54Nu2A==",
       "type": "package",
@@ -13445,7 +13477,8 @@
       "Microsoft.EntityFrameworkCore.Sqlite >= 2.2.3",
       "Microsoft.NETCore.App >= 2.2.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.2.0",
-      "MySql.Data >= 8.0.15"
+      "MySql.Data >= 8.0.15",
+      "MySql.Data.EntityFrameworkCore >= 8.0.15"
     ]
   },
   "packageFolders": {
@@ -13455,11 +13488,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\CrowSoft\\CrowSoft\\Projects\\crowsoftmvc\\crowsoftmvc.csproj",
+      "projectUniqueName": "F:\\CrowSoft\\LYIT_ProjectManagement\\crowsoftmvc\\crowsoftmvc.csproj",
       "projectName": "crowsoftmvc",
-      "projectPath": "F:\\CrowSoft\\CrowSoft\\Projects\\crowsoftmvc\\crowsoftmvc.csproj",
+      "projectPath": "F:\\CrowSoft\\LYIT_ProjectManagement\\crowsoftmvc\\crowsoftmvc.csproj",
       "packagesPath": "C:\\Users\\Charles\\.nuget\\packages\\",
-      "outputPath": "F:\\CrowSoft\\CrowSoft\\Projects\\crowsoftmvc\\obj\\",
+      "outputPath": "F:\\CrowSoft\\LYIT_ProjectManagement\\crowsoftmvc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -13515,6 +13548,10 @@
             "version": "[2.2.0, )"
           },
           "MySql.Data": {
+            "target": "Package",
+            "version": "[8.0.15, )"
+          },
+          "MySql.Data.EntityFrameworkCore": {
             "target": "Package",
             "version": "[8.0.15, )"
           }

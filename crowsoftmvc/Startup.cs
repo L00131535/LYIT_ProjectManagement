@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net;
 using Microsoft.AspNetCore.HttpOverrides;
+using MySql.Data.EntityFrameworkCore.Extensions;
 
 namespace crowsoftmvc
 {
@@ -38,14 +39,14 @@ namespace crowsoftmvc
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
+                options.UseMySQL(
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            services.Add(new ServiceDescriptor(typeof(DummyContext), new DummyContext(Configuration.GetConnectionString("DefaultConnection"))));
+            //services.Add(new ServiceDescriptor(typeof(CsoftDbContext), new CsoftDbContext(Configuration.GetConnectionString("DefaultConnection"))));
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.KnownProxies.Add(IPAddress.Parse("172.28.25.133"));

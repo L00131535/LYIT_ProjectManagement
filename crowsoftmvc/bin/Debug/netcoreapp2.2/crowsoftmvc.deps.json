@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "f19f3587e384fd6c89081d0aa60a9be4a8f1e690"
+    "signature": "195763990818050ba6a623c6d0bbfd7d081a96f1"
   },
   "compilationOptions": {
     "defines": [
@@ -29,7 +29,8 @@
           "Microsoft.EntityFrameworkCore.Sqlite": "2.2.3",
           "Microsoft.NETCore.App": "2.2.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.0",
-          "MySql.Data": "8.0.15"
+          "MySql.Data": "8.0.15",
+          "MySql.Data.EntityFrameworkCore": "8.0.15"
         },
         "runtime": {
           "crowsoftmvc.dll": {}
@@ -473,6 +474,21 @@
         },
         "compile": {
           "lib/netcoreapp2.0/MySql.Data.dll": {}
+        }
+      },
+      "MySql.Data.EntityFrameworkCore/8.0.15": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore.Relational": "2.2.3",
+          "MySql.Data": "8.0.15"
+        },
+        "runtime": {
+          "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {
+            "assemblyVersion": "8.0.15.0",
+            "fileVersion": "8.0.15.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/MySql.Data.EntityFrameworkCore.dll": {}
         }
       },
       "NETStandard.Library/2.0.3": {
@@ -3949,6 +3965,13 @@
       "sha512": "sha512-PnjT2+TzlYUBF5cILcLMD1ux85P5iiRTF9PWx+Mel6/Z/rx+k39aWuA0mozfdgd+0TlJjGKKTyQZfKeYlRXTUA==",
       "path": "mysql.data/8.0.15",
       "hashPath": "mysql.data.8.0.15.nupkg.sha512"
+    },
+    "MySql.Data.EntityFrameworkCore/8.0.15": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-NjYJSbHmiEmxesaNAWQRk15roOX81bI2toPpBypYhHFIKXHxkIPgQH3lxV60efMlIyhSnzLqnIE5kmNsPWfzww==",
+      "path": "mysql.data.entityframeworkcore/8.0.15",
+      "hashPath": "mysql.data.entityframeworkcore.8.0.15.nupkg.sha512"
     },
     "NETStandard.Library/2.0.3": {
       "type": "package",
