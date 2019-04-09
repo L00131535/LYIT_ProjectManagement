@@ -40,7 +40,6 @@ F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\bin\Debug\netcoreapp2.2\crowsoftm
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\bin\Debug\netcoreapp2.2\crowsoftmvc.pdb
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\bin\Debug\netcoreapp2.2\crowsoftmvc.Views.dll
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\bin\Debug\netcoreapp2.2\crowsoftmvc.Views.pdb
-F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.csprojAssemblyReference.cache
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.csproj.CoreCompileInputs.cache
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.RazorAssemblyInfo.cache
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.RazorAssemblyInfo.cs
@@ -68,3 +67,11 @@ F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftm
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.dll
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.pdb
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.csproj.CopyComplete
+F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Login.g.cshtml.cs
+F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\Register.g.cshtml.cs
+F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\Account\_ViewImports.g.cshtml.cs
+F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.g.cshtml.cs
+F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
+F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
+F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
+f:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.csprojAssemblyReference.cache

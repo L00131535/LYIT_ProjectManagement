@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
+using crowsoftmvc.Areas.Identity.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.MySqlClient;
-using crowsoftmvc.Models;
-using crowsoftmvc.Areas.Identity.Data;
 
-namespace crowsoftmvc.Data
+namespace crowsoftmvc.Models
 {
-    public class ApplicationDbContext : IdentityDbContext<crowsoftmvcUser>
+    public class crowsoftmvcContext : IdentityDbContext<crowsoftmvcUser>
     {
-        public string ConnectionString { get; set; }
-
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public crowsoftmvcContext(DbContextOptions<crowsoftmvcContext> options)
             : base(options)
         {
-
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -25,12 +23,5 @@ namespace crowsoftmvc.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-
-        private MySqlConnection GetConnection()
-        {
-            return new MySqlConnection(ConnectionString);
-        }
-
-        public DbSet<crowsoftmvc.Models.UserAccount> UserAccount { get; set; }
     }
 }

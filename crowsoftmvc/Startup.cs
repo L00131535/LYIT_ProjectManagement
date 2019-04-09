@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
+using crowsoftmvc.Areas.Identity.Data;
 using crowsoftmvc.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,9 +37,10 @@ namespace crowsoftmvc
             });
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySQL(
+                options.UseMySql(
                     Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddDefaultIdentity<crowsoftmvcUser>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -66,6 +68,7 @@ namespace crowsoftmvc
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             //REMEMBER TO UNCOMMENT THIS BEFORE CHECKING INTO CROWSOFT
             //app.UseForwardedHeaders(new ForwardedHeadersOptions
