@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using crowsoftmvc.Data;
 using crowsoftmvc.Models;
+using Microsoft.AspNetCore.Routing;
 
 namespace crowsoftmvc.Controllers
 {
     public class UserAccountsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private Counties myCounties = new Counties();
 
         public UserAccountsController(ApplicationDbContext context)
         {
@@ -46,7 +48,8 @@ namespace crowsoftmvc.Controllers
         // GET: UserAccounts/Create
         public IActionResult Create()
         {
-            return View();
+            UserAccount user_account = new UserAccount();
+            return View(user_account);
         }
 
         // POST: UserAccounts/Create
@@ -58,9 +61,33 @@ namespace crowsoftmvc.Controllers
         {
             if (ModelState.IsValid)
             {
+                // Calling the Security Helper Class to encode the string to bytearray before saving to database
+                userAccount.Password = Helpers.SecurityHelper.ToByteArrayToString(userAccount.Password).ToString();
                 _context.Add(userAccount);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Redirect("/Home");
+            }
+            return View(userAccount);
+        }
+
+        public IActionResult Login()
+        {
+            UserAccount user_account = new UserAccount();
+            return View(user_account);
+        }
+
+        // GET: UserAccounts/Edit/5
+        public async Task<IActionResult> Login(string EmailAddress, string Password)
+        {
+            if (EmailAddress == null)
+            {
+                return NotFound();
+            }
+
+            var userAccount = await _context.UserAccount.FindAsync(EmailAddress);
+            if (userAccount == null)
+            {
+                return NotFound();
             }
             return View(userAccount);
         }

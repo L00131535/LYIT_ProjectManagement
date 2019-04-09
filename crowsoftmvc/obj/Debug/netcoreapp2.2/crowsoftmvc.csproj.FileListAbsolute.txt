@@ -99,8 +99,8 @@ F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftm
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.dll
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.pdb
 F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\crowsoftmvc.csproj.CopyComplete
-F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Create.g.cshtml.cs
-F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Delete.g.cshtml.cs
-F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Details.g.cshtml.cs
-F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Edit.g.cshtml.cs
-F:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Index.g.cshtml.cs
+f:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Create.g.cshtml.cs
+f:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Delete.g.cshtml.cs
+f:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Details.g.cshtml.cs
+f:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Edit.g.cshtml.cs
+f:\CrowSoft\LYIT_ProjectManagement\crowsoftmvc\obj\Debug\netcoreapp2.2\Razor\Views\UserAccounts\Index.g.cshtml.cs
