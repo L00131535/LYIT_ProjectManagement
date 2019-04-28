@@ -35,8 +35,25 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-                    <partial name="_LoginPartial" />
                 </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
+                            style="background-color:white;color:black;border:none !important;outline:none !important">
+                        Configuration
+                    </button>
+                    <div class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="DefaultFeature" asp-action="Index">Default Features</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="CrowsoftUser" asp-action="Index">Manage Users</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="dropdown-item" href="#">Link 3</a>
+                        </li>
+                    </div>
+                </div>
+                <partial name="_LoginPartial" />
             </div>
         </nav>
     </header>
