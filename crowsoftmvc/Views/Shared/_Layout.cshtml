@@ -37,7 +37,18 @@
                     </ul>
                 </div>
                 <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" 
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+                            style="background-color:white;color:black;border:none !important;outline:none !important">
+                        Quotes
+                    </button>
+                    <div class="dropdown-menu">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-controller="BuildingQuotes" asp-action="Index">List Building Quotes</a>
+                        </li>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
                             style="background-color:white;color:black;border:none !important;outline:none !important">
                         Configuration
                     </button>
@@ -47,9 +58,6 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="CrowsoftUser" asp-action="Index">Manage Users</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="dropdown-item" href="#">Link 3</a>
                         </li>
                     </div>
                 </div>

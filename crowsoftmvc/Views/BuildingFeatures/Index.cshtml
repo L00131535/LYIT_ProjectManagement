@@ -1,0 +1,78 @@
+﻿@*@model IEnumerable<crowsoftmvc.Models.BuildingFeatures>*@
+@model InputModelBuidlingFeatures
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>List of Building Features for Quote ID : @Model.buildingQouteId</h1>
+@*<div class="form-group">
+    <label value="User Name and Last Name: " class="control-label"></label>
+    <label value="ViewBag.UserName" class="form-control" />
+
+</div>*@
+<p>
+    <a asp-action="Create" asp-route-buildingQouteId="@Model.buildingQouteId">Add Building Feature</a>
+     
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Feature Descirption
+            </th>
+            <th>
+                Comments
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Unit Price
+            </th>
+            <th>
+                Total Cost
+            </th>
+            <th>
+                Building Quote
+            </th>
+            <th>
+                Default Feature
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.buildingFeaters) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FeatureDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comments)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuildingQuoteIdBuildingQuoteNavigation.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DefaultFeatureIdDefaultFeatureNavigation.Description)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdBuildingFeatures">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdBuildingFeatures">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdBuildingFeatures">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

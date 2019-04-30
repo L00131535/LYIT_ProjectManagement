@@ -35,7 +35,13 @@ namespace crowsoftmvc.Data
             return new MySqlConnection(ConnectionString);
         }
 
-        
+        public DbSet<crowsoftmvc.Models.BuildingFeatures> BuildingFeatures { get; set; }
+
+        public DbSet<crowsoftmvc.Models.BuildingImage> BuildingImage { get; set; }
+
+        public DbSet<crowsoftmvc.Models.BuildingQuote> BuildingQuote { get; set; }
+
+      
 
 
     }
