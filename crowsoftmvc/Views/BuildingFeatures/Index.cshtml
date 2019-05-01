@@ -20,6 +20,9 @@
     <thead>
         <tr>
             <th>
+                Choose Actions
+            </th>
+            <th>
                 Feature Descirption
             </th>
             <th>
@@ -47,6 +50,11 @@
 @foreach (var item in Model.buildingFeaters) {
         <tr>
             <td>
+                <a asp-action="Edit" asp-route-id="@item.IdBuildingFeatures">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdBuildingFeatures">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdBuildingFeatures">Delete</a>
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.FeatureDescription)
             </td>
             <td>
@@ -67,12 +75,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DefaultFeatureIdDefaultFeatureNavigation.Description)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdBuildingFeatures">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdBuildingFeatures">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdBuildingFeatures">Delete</a>
-            </td>
         </tr>
-}
+ }
     </tbody>
 </table>

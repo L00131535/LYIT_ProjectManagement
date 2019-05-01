@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
+using Microsoft.AspNetCore.StaticFiles;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
+using Microsoft.AspNetCore.Hosting;
 
 namespace crowsoftmvc.Controllers
 {
@@ -19,17 +22,20 @@ namespace crowsoftmvc.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly IFileProvider fileProvider;
+        private readonly IHostingEnvironment hostingEnvironment;
 
-        public BuildingImagesController(ApplicationDbContext context, IFileProvider fileProvider)
+        public BuildingImagesController(ApplicationDbContext context, IFileProvider fileProvider, IHostingEnvironment env)
         {
             _context = context;
             this.fileProvider = fileProvider;
+            hostingEnvironment = env;
         }
 
         // GET: BuildingImages
         public async Task<IActionResult> Index(int idBuildingQoute)
         {
             ViewData["BuildingQuoteId"] = idBuildingQoute;
+            ViewData["MainPath"] = Directory.GetCurrentDirectory();
             return View(await _context.BuildingImage.Where(b => b.BuildingQuoteIdBuildingQuote == idBuildingQoute).ToListAsync());
         }
 
@@ -47,16 +53,17 @@ namespace crowsoftmvc.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["BuildingQuoteId"] = buildingImage.BuildingQuoteIdBuildingQuote;
             return View(buildingImage);
         }
 
         // GET: BuildingImages/Create
         public IActionResult Create(int idBuildingQoute)
         {
+            ViewData["BuildingQuoteIdBuildingQuote"] = new SelectList(_context.Set<BuildingQuote>(), "IdBuildingQuote", "Description");
             BuildingImage buildingImage = new BuildingImage();
             buildingImage.BuildingQuoteIdBuildingQuote = idBuildingQoute;
-            //buildingImage.FileToUpload ; 
+            ViewData["BuildingQuoteId"] = idBuildingQoute;
             return View(buildingImage);
         }
 
@@ -65,20 +72,20 @@ namespace crowsoftmvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdBuildingImage,Description,FileToUpload,ImagePath,BuildingQuoteIdBuildingQuote")] BuildingImage buildingImage, IFormFile FileToUpload)
+        public async Task<IActionResult> Create([Bind("IdBuildingImage,Description,ImagePath,BuildingQuoteIdBuildingQuote")] BuildingImage buildingImage, IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                if (FileToUpload == null || FileToUpload.Length == 0)
+                if (file == null || file.Length == 0)
                     return Content("file not selected");
-
-                var path = await UploadFile(FileToUpload);
+                
+                var path = await UploadFile(file, buildingImage.BuildingQuoteIdBuildingQuote);
                 if (path != "")
                 {
                     buildingImage.ImagePath = path;
                     _context.Add(buildingImage);
                     await _context.SaveChangesAsync();
-                    return RedirectToAction(nameof(Index));
+                    return RedirectToAction(actionName: "Index", controllerName: "BuildingImages", routeValues: new { idBuildingQoute = buildingImage.BuildingQuoteIdBuildingQuote });
                 }
                 else
                 {
@@ -86,6 +93,7 @@ namespace crowsoftmvc.Controllers
                 }
                 
             }
+            ViewData["BuildingQuoteId"] = buildingImage.BuildingQuoteIdBuildingQuote;
             return View(buildingImage);
         }
 
@@ -102,6 +110,8 @@ namespace crowsoftmvc.Controllers
             {
                 return NotFound();
             }
+            ViewData["BuildingQuoteIdBuildingQuote"] = new SelectList(_context.Set<BuildingQuote>(), "IdBuildingQuote", "Description");
+            ViewData["BuildingQuoteId"] = buildingImage.BuildingQuoteIdBuildingQuote;
             return View(buildingImage);
         }
 
@@ -110,7 +120,7 @@ namespace crowsoftmvc.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdBuildingImage,Description,FileToUpload,ImagePath,BuildingQuoteIdBuildingQuote")] BuildingImage buildingImage)
+        public async Task<IActionResult> Edit(int id, [Bind("IdBuildingImage,Description,ImagePath,BuildingQuoteIdBuildingQuote")] BuildingImage buildingImage, IFormFile file)
         {
             if (id != buildingImage.IdBuildingImage)
             {
@@ -135,26 +145,28 @@ namespace crowsoftmvc.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(actionName: "Index", controllerName: "BuildingImages", routeValues: new { idBuildingQoute = buildingImage.BuildingQuoteIdBuildingQuote });
             }
             return View(buildingImage);
         }
 
-        public async Task<string> UploadFile(IFormFile file)
+        public async Task<string> UploadFile(IFormFile file,int QuoteId)
         {
             if (file == null || file.Length == 0)
                 return "";
 
-            var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "ImageFiles",
-                        file.FileName);
+            FileInfo fi = new FileInfo(file.FileName);
 
+            var newFilename = QuoteId + "_" + String.Format("{0:d9}", (DateTime.Now.Ticks / 10) % 1000000000) + fi.Extension;
+            string webPath = hostingEnvironment.WebRootPath;
+            var path = Path.Combine("" , webPath + @"\ImageFiles\" + newFilename);
+            var pathToSave = @"/ImageFiles/" + newFilename;
             using (var stream = new FileStream(path, FileMode.Create))
             {
                 await file.CopyToAsync(stream);
             }
 
-            return path;
+            return pathToSave;
         }
 
         public async Task<IActionResult> Download(string filename)
@@ -162,9 +174,9 @@ namespace crowsoftmvc.Controllers
             if (filename == null)
                 return Content("filename not present");
 
-            var path = Path.Combine(
-                           Directory.GetCurrentDirectory(),
-                           "/ImageFiles", filename);
+            string webPath = hostingEnvironment.WebRootPath;
+            var path = Path.Combine("" , webPath + @"\ImageFiles\" + filename);
+            var pathToSave = @"/ImageFiles/" + filename;
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(path, FileMode.Open))
@@ -179,7 +191,7 @@ namespace crowsoftmvc.Controllers
         {
             var types = GetMimeTypes();
             var ext = Path.GetExtension(path).ToLowerInvariant();
-            return types[ext];
+            return types[ext].ToString();
         }
 
         private Dictionary<string, string> GetMimeTypes()
@@ -191,10 +203,10 @@ namespace crowsoftmvc.Controllers
                 {".doc", "application/vnd.ms-word"},
                 {".docx", "application/vnd.ms-word"},
                 {".xls", "application/vnd.ms-excel"},
-                {".xlsx", "application/vnd.openxmlformats/officedocument.spreadsheetml.sheet"},
+                {".xlsx", "application/vnd.openxmlformatsofficedocument.spreadsheetml.sheet"},
                 {".png", "image/png"},
+                {".jpg", "image/jpg"},
                 {".jpg", "image/jpeg"},
-                {".jpeg", "image/jpeg"},
                 {".gif", "image/gif"},
                 {".csv", "text/csv"}
             };
@@ -214,7 +226,7 @@ namespace crowsoftmvc.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["BuildingQuoteId"] = buildingImage.BuildingQuoteIdBuildingQuote;
             return View(buildingImage);
         }
 
@@ -226,7 +238,7 @@ namespace crowsoftmvc.Controllers
             var buildingImage = await _context.BuildingImage.FindAsync(id);
             _context.BuildingImage.Remove(buildingImage);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(actionName: "Index", controllerName: "BuildingImages", routeValues: new { idBuildingQoute = buildingImage.BuildingQuoteIdBuildingQuote });
         }
 
         private bool BuildingImageExists(int id)

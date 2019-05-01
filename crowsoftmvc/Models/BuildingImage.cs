@@ -26,12 +26,9 @@ namespace crowsoftmvc.Models
         //[Required(ErrorMessage = "{0} is required.")]
         public string ImagePath { get; set; }
 
-        [HiddenInput(DisplayValue = false)]
-        [Column("BuildingQuoteIdBuildingQuote")]
-        [ForeignKey("BuildingQuote")]
+        [ForeignKey("idBuildingQuote")]
         public int BuildingQuoteIdBuildingQuote { get; set; }
 
-        [NotMapped]
         public virtual BuildingQuote BuildingQuoteIdBuildingQuoteNavigation { get; set; }
     }
 

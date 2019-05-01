@@ -14,19 +14,10 @@
     <thead>
         <tr>
             <th>
+                Choose Actions
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MeasurementType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Height)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Width)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Depth)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PurposeOfBuilding)
@@ -53,19 +44,14 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                <a asp-action="Edit" asp-route-id="@item.IdBuildingQuote">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdBuildingQuote">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdBuildingQuote">Delete</a>
+                <a asp-action="CreateFeature" asp-route-id="@item.IdBuildingQuote">Add Building Details</a> |
+                <a asp-action="AddImages" asp-route-id="@item.IdBuildingQuote">Add Images</a> |
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MeasurementType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Height)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Width)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Depth)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PurposeOfBuilding)
@@ -84,13 +70,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateUpdated)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdBuildingQuote">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdBuildingQuote">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdBuildingQuote">Delete</a>
-                <a asp-action="CreateFeature" asp-route-id="@item.IdBuildingQuote">Add Building Details</a> |
-                <a asp-action="AddImages" asp-route-id="@item.IdBuildingQuote">Add Images</a> |
             </td>
         </tr>
 }

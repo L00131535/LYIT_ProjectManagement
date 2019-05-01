@@ -8,11 +8,14 @@
 <h1>List of Building Images for Quote ID : @ViewBag.BuildingQuoteId</h1>
 
 <p>
-    <a asp-action="Create">Add New Image</a>
+    <a asp-action="Create" asp-route-idBuildingQoute="@ViewBag.BuildingQuoteId">Add New Image</a>
 </p>
-<table class="table">
+<table class="table" enctype="multipart/form-data">
     <thead>
         <tr>
+            <th>
+                Choose Actions
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -29,20 +32,20 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @*<a asp-action="Edit" asp-route-id="@item.IdBuildingImage">Edit</a> |*@
+                <a asp-action="Details" asp-route-id="@item.IdBuildingImage">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdBuildingImage">Delete</a>
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ImagePath)
+                <img class="img-thumbnail" src="@item.ImagePath" asp-append-version="true" alt="@item.ImagePath" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.BuildingQuoteIdBuildingQuote)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdBuildingImage">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdBuildingImage">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdBuildingImage">Delete</a>
-            </td>
         </tr>
-}
+}       
     </tbody>
 </table>

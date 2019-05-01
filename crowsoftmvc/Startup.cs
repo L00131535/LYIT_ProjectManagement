@@ -49,7 +49,7 @@ namespace crowsoftmvc
 
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "ImageFiles")));
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/ImageFiles")));
 
             services.AddMvc(obj =>
                {
